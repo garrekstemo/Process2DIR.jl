@@ -1,7 +1,7 @@
 name = "Process2DIR"
 uuid = "f080f07f-bfbc-4af6-bf09-192cc2dff6a2"
 authors = ["Garrek Stemo <8449000+garrekds@users.noreply.github.com>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
