@@ -188,5 +188,4 @@ function fourier_transform(data, newlength)
     return real(transformed)
 end
 
-
 end # module Process2DIR
