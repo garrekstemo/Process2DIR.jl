@@ -1,0 +1,9 @@
+name = "Process2DIR"
+uuid = "f080f07f-bfbc-4af6-bf09-192cc2dff6a2"
+authors = ["Garrek Stemo <8449000+garrekds@users.noreply.github.com>"]
+version = "0.1.0"
+
+[deps]
+DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
+FFTW = "7a1cc6ca-52ef-59f5-83cd-3a7055c09341"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
