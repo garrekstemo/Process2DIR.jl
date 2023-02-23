@@ -6,7 +6,8 @@ using FFTW
 
 export Spectra,
        process_2dir,
-       calibrate_frequency
+       calibrate_frequency,
+       PIXELS
 
 
 struct Spectra
