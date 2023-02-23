@@ -5,7 +5,8 @@ using StatsBase: mean
 using FFTW
 
 export Spectra,
-       process_2dir
+       process_2dir.
+       calibrate_frequency
 
 
 struct Spectra
