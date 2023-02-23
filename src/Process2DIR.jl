@@ -33,7 +33,7 @@ multiplying the number of time steps in the raw data.
 function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR")
     
     files = readdir(dir)
-    time = get_time(files[1])
+    time = get_time(dir, files[1])
     t2 = get_t2(files)
     n_spectra = num_spectra(files)
 
@@ -121,7 +121,7 @@ end
 
 Get the unique time steps (every 4) from the first column in a 2DIR file.
 """
-function get_time(file; extension=".2DIR")
+function get_time(dir, file; extension=".2DIR")
     if occursin(extension, file)
         raw = readdlm(joinpath(dir, file))
         time = unique(raw[:, 1])
