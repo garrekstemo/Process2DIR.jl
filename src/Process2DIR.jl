@@ -13,9 +13,9 @@ export Spectra,
 struct Spectra
     frequency::Array{Float64}
     t2::Array{Int64}
-    pump_off::Array{Float64}
-    pump_on::Array{Float64}
-    pump_probe::Array{Float64}
+    pump_off::Array{Float64, 2}
+    pump_on::Array{Float64, 2}
+    pump_probe::Array{Float64, 2}
     spectra::Array{Float64, 3}
 end
 
@@ -65,11 +65,11 @@ function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR"
             end
         end
         # Retrieve pump-probe spectra and reshape Matrix to Vector
-        if i == lastindex(t2)
-            pump_off = vec(mean(pump_offs, dims=1))
-            pump_on = vec(mean(pump_ons, dims=1))
-            pump_probe = vec(mean(pump_probes, dims=1))
-        end
+        # if i == lastindex(t2)
+            pump_off[i, :] = vec(mean(pump_offs, dims=1))
+            pump_on[i, :] = vec(mean(pump_ons, dims=1))
+            pump_probe[i, :] = vec(mean(pump_probes, dims=1))
+        # end
 
         spectras[1, :, :] ./= 2  # divide first row (time) elements of each spectrum by 2
         transformed = fourier_transform(spectras, zero_padding)
