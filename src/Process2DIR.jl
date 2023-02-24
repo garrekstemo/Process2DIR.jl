@@ -58,9 +58,9 @@ function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR"
 
             if isfile(file)
                 raw = readdlm(file)[:, 2:end]  # first column is the time axis, obtained above.
-                if i == lastindex(t2)
+                # if i == lastindex(t2)
                     pump_offs[j, :], pump_ons[j, :], pump_probes[j, :] = probe_spectra(raw)
-                end
+                # end
                 spectras[:, :, j] = fourframe(raw)
             end
         end
