@@ -77,6 +77,10 @@ function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR"
         end
     end
 
+    # What are we doing here? Normalizing?
+    for i in eachindex(t2)
+        spectra[:, :, i] ./= pump_off[1, :]
+    end
     return Spectra(frequency, t2, pump_off, pump_on, pump_probe, spectra)
 end
 
