@@ -12,6 +12,7 @@ export Spectra,
 
 struct Spectra
     frequency::Array{Float64}
+    t2::Array{Int64}
     pump_off::Array{Float64}
     pump_on::Array{Float64}
     pump_probe::Array{Float64}
@@ -79,7 +80,7 @@ function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR"
         end
     end
 
-    return Spectra(frequency, pump_off, pump_on, pump_probe, spectra)
+    return Spectra(frequency, t2, pump_off, pump_on, pump_probe, spectra)
 end
 
 """
