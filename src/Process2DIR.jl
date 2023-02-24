@@ -71,7 +71,7 @@ function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR"
         spectras[1, :, :] ./= 2  # divide first row (time) elements of each spectrum by 2
         transformed = fourier_transform(spectras, zero_padding)
         if i > 1
-            spectra[:, :, i] = -(transformed - spectra[:, :, 1]) # ./= pump_off[1, :]
+            spectra[:, :, i] = -(transformed - spectra[:, :, 1])
         elseif i == 1
             spectra[:, :, i] = transformed
         end
