@@ -58,18 +58,15 @@ function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR"
 
             if isfile(file)
                 raw = readdlm(file)[:, 2:end]  # first column is the time axis, obtained above.
-                # if i == lastindex(t2)
-                    pump_offs[j, :], pump_ons[j, :], pump_probes[j, :] = probe_spectra(raw)
-                # end
+                pump_offs[j, :], pump_ons[j, :], pump_probes[j, :] = probe_spectra(raw)
                 spectras[:, :, j] = fourframe(raw)
             end
         end
+
         # Retrieve pump-probe spectra and reshape Matrix to Vector
-        # if i == lastindex(t2)
-            pump_off[i, :] = vec(mean(pump_offs, dims=1))
-            pump_on[i, :] = vec(mean(pump_ons, dims=1))
-            pump_probe[i, :] = vec(mean(pump_probes, dims=1))
-        # end
+        pump_off[i, :] = vec(mean(pump_offs, dims=1))
+        pump_on[i, :] = vec(mean(pump_ons, dims=1))
+        pump_probe[i, :] = vec(mean(pump_probes, dims=1))
 
         spectras[1, :, :] ./= 2  # divide first row (time) elements of each spectrum by 2
         transformed = fourier_transform(spectras, zero_padding)
