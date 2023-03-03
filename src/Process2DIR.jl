@@ -33,7 +33,8 @@ It is zero without rotating frame (default).
 `zeropad_multiple` determines the zero padding of the Fourier transform by
 multiplying the number of time steps in the raw data.
 """
-function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR")
+function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR",
+            background=true)
     
     files = readdir(dir)
     time = get_time(dir, files[1])
@@ -71,9 +72,13 @@ function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR"
         spectras[1, :, :] ./= 2  # divide first row (time) elements of each spectrum by 2
         transformed = fourier_transform(spectras, zero_padding)
         if i > 1
-            spectra[:, :, i] = -(transformed - spectra[:, :, 1])
+            if background == true
+                spectra[:, :, i] = -(transformed - spectra[:, :, 1])
+            else
+                spectra[:, :, i] = -transformed
+            end
         elseif i == 1
-            spectra[:, :, i] = transformed
+            spectra[:, :, i] = -transformed
         end
     end
 
