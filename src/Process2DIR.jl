@@ -69,7 +69,7 @@ function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR"
         pump_on[i, :] = vec(mean(pump_ons, dims=1))
         pump_probe[i, :] = vec(mean(pump_probes, dims=1))
 
-        spectras[1, :, :] ./= 2  # divide first row (time) elements of each spectrum by 2
+        spectras[1, :, :] ./= 2  # divide first row (time) elements of each spectrum by 2 for some reason
         transformed = fourier_transform(spectras, zero_padding)
         if i > 1
             if background == true
