@@ -82,7 +82,7 @@ function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR"
         end
     end
 
-    # What are we doing here? Normalizing?
+    # Normalize spectra by pump-off spectrum (with scale factor `norm_scale`)
     for i in size(spectra, 3)
         for j in size(spectra, 2)
             if iszero(norm_scale)
