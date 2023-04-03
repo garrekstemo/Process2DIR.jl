@@ -34,7 +34,7 @@ It is zero without rotating frame (default).
 multiplying the number of time steps in the raw data.
 """
 function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR",
-            background=true, norm_scale=0)
+            background=true, background_scale = 1, norm_scale=0)
     
     files = readdir(dir)
     time = get_time(dir, files[1])
@@ -73,7 +73,7 @@ function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR"
         transformed = fourier_transform(spectras, zero_padding)
         if i > 1
             if background == true
-                spectra[:, :, i] = -(transformed - spectra[:, :, 1])
+                spectra[:, :, i] = -(transformed - spectra[:, :, 1] .* background_scale)
             else
                 spectra[:, :, i] = -transformed
             end
