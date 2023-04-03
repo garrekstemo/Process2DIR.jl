@@ -89,7 +89,9 @@ function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR"
                 if iszero(norm_scale)
                     spectra[:, j, i] = spectra[:, j, i]
                 else
-                    spectra[:, j, i] = spectra[:, j, i] ./ (pump_off[1, j] .* norm_scale)
+                    println("Divide by pump-off spectrum.")
+                    div = pump_off[1, j] .* norm_scale
+                    spectra[:, j, i] = spectra[:, j, i] ./ div
                 end
             end
         end
