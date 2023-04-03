@@ -84,14 +84,13 @@ function process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR"
 
     # What are we doing here? Normalizing?
     for i in size(spectra, 3)
-        for j in size(spectra, 2)
+        for j in size(spectra, 1)
             if i != 1
                 if iszero(norm_scale)
-                    spectra[:, j, i] = spectra[:, j, i]
+                    spectra[j, :, i] = spectra[j, :, i]
                 else
-                    println("Divide by pump-off spectrum.")
-                    div = pump_off[1, j] .* norm_scale
-                    spectra[:, j, i] = spectra[:, j, i] ./ div
+                    div = pump_off[j, 1] .* norm_scale
+                    spectra[j, :, i] = spectra[:, j, i] ./ div
                 end
             end
         end
