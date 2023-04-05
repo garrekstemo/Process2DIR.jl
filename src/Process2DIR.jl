@@ -164,12 +164,23 @@ end
 
 Calibrate the frequency axis by a linear fit.
 """
-function calibrate_frequency(ω, cal1, cal2, offset)
+function calibrate_frequency(ω, slope, offset)
     ω_calibrated = zeros(length(ω))
     for i in eachindex(ω)
-        ω_calibrated[i] = cal1 / cal2 * ω[i] + offset
+        ω_calibrated[i] = slope * ω[i] + offset
     end
     return ω_calibrated
+end
+
+"""
+    slopeoffset(x1, x2, x1_i, x2_i)
+
+Scale and shift the frequency axes (ω1 and ω3) by a linear function.
+"""
+function slopeoffset(x1, x2, x1_i, x2_i)
+    slope = (x2_i - x1_i) / (x2 - x1)
+    offset = (-x2_i * x1 + x1_i * x2) / (x2 - x1)
+    return slope, offset
 end
 
 """
