@@ -22,7 +22,8 @@ end
 const PIXELS::Int64 = 128  # number of pixels in a row of the MCT detector array
 
 """
-    process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR")
+    process_2dir(dir, prefix, f0=0.0; zeropad_multiple=8, extension=".2DIR",
+    background=true, background_scale = 1, norm_scale=0)
 
 Load all 2DIR data from a directory and process it,
 returning the pump-off, pump-on, pump-probe spectra and 2DIR spectra (at each time step).
