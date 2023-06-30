@@ -161,7 +161,7 @@ function calculate_frequency(time, freq_length, f0=0.0)
 end
 
 """
-    calibrate_frequency(ω, cal1, cal2, offset)
+    calibrate_frequency(ω, slope, offset)
 
 Calibrate the frequency axis by a linear fit.
 """
