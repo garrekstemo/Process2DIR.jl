@@ -7,8 +7,10 @@ using FFTW
 export Spectra,
        process_2dir,
        calibrate_frequency,
-       PIXELS
+       PIXELS,
+       cross_section
 
+include("post_processing.jl")
 
 struct Spectra
     frequency::Array{Float64}
@@ -158,42 +160,6 @@ the number of rows in the Fourier transformed spectra.
 function calculate_frequency(time, freq_length, f0=0.0)
     frequency =  range(-1, 1, length = freq_length) ./ (2 * (time[2] - time[1]) * 1e-15)
     return f0 .+ frequency ./ 2.9997e10  # shift by f0 and convert to wavenumbers
-end
-
-"""
-    calibrate_frequency(ω, slope, offset)
-
-Calibrate the frequency axis by a linear fit.
-"""
-function calibrate_frequency(ω, slope, offset)
-    ω_calibrated = zeros(length(ω))
-    for i in eachindex(ω)
-        ω_calibrated[i] = slope * ω[i] + offset
-    end
-    return ω_calibrated
-end
-
-"""
-    slopeoffset(x1, x2, x1_i, x2_i)
-
-Scale and shift the frequency axes (ω1 and ω3) by a linear function.
-"""
-function slopeoffset(x1, x2, x1_i, x2_i)
-    slope = (x2_i - x1_i) / (x2 - x1)
-    offset = (-x2_i * x1 + x1_i * x2) / (x2 - x1)
-    return slope, offset
-end
-
-"""
-    pumpprobe(raw)
-
-Get the pump-off, pump-on, and pump-probe spectra directly from raw data.
-"""
-function probe_spectra(raw)
-    pump_off = raw[2, :] + raw[4, :]
-    pump_on = raw[1, :] + raw[3, :]
-    pump_probe = raw[1, :] + raw[3, :] - raw[2, :] - raw[4, :]
-    return pump_off, pump_on, pump_probe
 end
 
 """
